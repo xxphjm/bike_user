@@ -91,10 +91,9 @@ const DrawerNavigator = () => {
                         style={{ marginRight: -20 }}
                     />
             }} >
-                {(props) =>
-                (<DrawerScreenContainer>
-                    <HomeScreen {...props} />
-                </DrawerScreenContainer>)
+                {(props) =>(<HomeScreen {...props} />)
+
+
                 }
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
@@ -107,9 +106,9 @@ const DrawerNavigator = () => {
                     />
             }} >
                 {(props) =>
-                (<DrawerScreenContainer>
+                (
                     <HomeScreen {...props} />
-                </DrawerScreenContainer>)
+                )
                 }
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
@@ -122,9 +121,9 @@ const DrawerNavigator = () => {
                     />
             }} >
                 {(props) =>
-                (<DrawerScreenContainer>
+                (
                     <HomeScreen {...props} />
-                </DrawerScreenContainer>)
+                )
                 }
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
@@ -137,9 +136,9 @@ const DrawerNavigator = () => {
                     />
             }} >
                 {(props) =>
-                (<DrawerScreenContainer>
+                (
                     <HomeScreen {...props} />
-                </DrawerScreenContainer>)
+                )
                 }
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
@@ -152,9 +151,9 @@ const DrawerNavigator = () => {
                     />
             }} >
                 {(props) =>
-                (<DrawerScreenContainer>
+                (
                     <HomeScreen {...props} />
-                </DrawerScreenContainer>)
+                )
                 }
             </Drawer.Screen>
 

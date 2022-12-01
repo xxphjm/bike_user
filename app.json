@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bike_user2",
-    "slug": "bike_user2",
+    "name": "bike_user",
+    "slug": "bike_user",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
