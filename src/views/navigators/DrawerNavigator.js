@@ -91,9 +91,10 @@ const DrawerNavigator = () => {
                         style={{ marginRight: -20 }}
                     />
             }} >
-                {(props) =>(<HomeScreen {...props} />)
-
-
+                {(props) =>
+                (
+                    <HomeScreen {...props} />
+                )
                 }
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
@@ -162,3 +163,5 @@ const DrawerNavigator = () => {
 };
 
 export default DrawerNavigator;
+
+

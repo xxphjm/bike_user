@@ -10,7 +10,7 @@ const DetailsScreen = ({ navigation, route }) => {
     // 這邊注意 怎麼跟上一頁(homescreen) 拿資料到這一頁來. 
     const pet = route.params;
     console.log("pet= ", pet)
-    
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
             <StatusBar backgroundColor={COLORS.background} />
