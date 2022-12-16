@@ -13,6 +13,8 @@ import {
 import { ScrollView } from 'react-native-virtualized-view';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import UserIcon from 'react-native-vector-icons/Feather';
+
 import COLORS from "../../const/colors"
 //寵物資料的api
 import pets from '../../const/pets';
@@ -78,8 +80,8 @@ const HomeScreen = ({ navigation }) => {
             {/* 標頭  header */}
             <View style={styles.Header}>
                 <Icon name="sort-variant" size={28} onPress={navigation.toggleDrawer} />
-                <Text style={{ color: COLORS.primary, fontSize: 16, fontWeight: "bold" }}>Smile Hsu</Text>
-                <Image source={require(".././../assets/person.png")} style={{ width: 30, height: 30, borderRadius: 15 }} />
+                <UserIcon name='user' size={26} color={COLORS.grey} onPress={() => navigation.navigate("Login")}/>
+                {/* <Image source={require(".././../assets/person.png")} style={{ width: 30, height: 30, borderRadius: 15 }} /> */}
             </View>
             {/* 主要內容 main */}
             <ScrollView showsVerticalScrollIndicator={false}>
