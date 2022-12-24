@@ -11,7 +11,7 @@ import HomeScreen from "../screens/HomeScreen"
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
-
+import Fixform from "../screens/Fixform"
 
 const Drawer = createDrawerNavigator();
 
@@ -126,6 +126,20 @@ const DrawerNavigator = (props) => {
                 {(props) =>
                 (
                     <HomeScreen {...props} />
+                )
+                }
+            </Drawer.Screen>
+            <Drawer.Screen name="PROFILE" options={{
+                title: "維修通報" ,drawerIcon: ({ color }) =>
+                    <Icon name="account"
+                        size={25}
+                        color={color}
+                        style={{ marginRight: -20 }}
+                    />
+            }} >
+                {(props) =>
+                (
+                    <Fixform {...props} />
                 )
                 }
             </Drawer.Screen>
