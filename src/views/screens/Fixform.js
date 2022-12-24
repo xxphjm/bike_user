@@ -54,7 +54,7 @@ const Fixform = ({ navigation }) => {
                 <View style={styles.MainContainer}>
                     <Text style={styles.FixHeader}>維修項目</Text>
                     <Text style={styles.FixContainerHeader}>單車序號</Text>
-                    <TextInput style={styles.BikeContainer} placeholder='輸入單車序號' ></TextInput>
+                    <TextInput style={styles.BikeContainer} placeholder='輸入單車序號'></TextInput>
                     <View style={{marginBottom:8,paddingLeft:'4%'}}>
                         <View style={{flexDirection:'row',alignItems:'flex-start'}}>
                             <CheckBox left title="前燈" checkedIcon="dot-circle-o" uncheckedIcon="circle-o" checked={headlight} onPress={() => setheadlight(!headlight)}/>

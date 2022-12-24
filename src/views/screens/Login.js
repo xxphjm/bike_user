@@ -107,7 +107,7 @@ const SignInScreen = ({navigation}) => {
         const foundUser = Users.filter( item => {
             return userName == item.username && password == item.password;
         } );
-     
+
         if ( data.username.length == 0 || data.password.length == 0 ) {
             Alert.alert('輸入錯誤!', '您的名稱或密碼沒輸入', [
                 {text: '好'}
@@ -344,6 +344,5 @@ const styles = StyleSheet.create({
         textShadowColor: 'rgba(0,0,0,0.65)',
         textShadowOffset: { width: 0.7, height: 0.7 },
         textShadowRadius: 3,
-
     }
   });

@@ -12,27 +12,12 @@ import Fixform from "../screens/Fixform"
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
-<<<<<<< HEAD
 
 const Drawer = createDrawerNavigator();
 
-const CustomDrawerContent = props => {
-=======
-import Fixform from "../screens/Fixform"
-
-const Drawer = createDrawerNavigator();
-
-
-//
-const CustomDrawerContent =  props => {
-
-        
+const CustomDrawerContent =  props => {    
         const {userName,img}=props.userdata
-    
 
-
-
->>>>>>> 6bfc20fb3bc99c4617795267676a86036380556d
     return (
         <DrawerContentScrollView style={{ paddingVertical: 30 }}>
             <View style={{ marginLeft: 20, marginVertical: 40 }}>
@@ -78,7 +63,6 @@ const showAlert=(props)=>{
         '提示',
         "確定要登出？",
         [
-           
             {
                 text: '取消',
                 onPress:()=>props.navigation.goBack
@@ -88,15 +72,11 @@ const showAlert=(props)=>{
                 onPress:()=>Alert.alert('ok')
                },
         ],
-   
     )
 }
 const DrawerNavigator = (props) => {
-  
-
    
     let userdata=props.route.params?props.route.params:{userName:false,img:false}
-
 
     return (
         <Drawer.Navigator screenOptions={{
@@ -193,21 +173,6 @@ const DrawerNavigator = (props) => {
                 {(props) =>
                 (
                     <HomeScreen {...props} />
-                )
-                }
-            </Drawer.Screen>
-            {/* ==================== 選單項目 ==================== */}
-            <Drawer.Screen name="PROFILE" options={{
-                title: "維修通報" ,drawerIcon: ({ color }) =>
-                    <Icon name="account"
-                        size={25}
-                        color={color}
-                        style={{ marginRight: -20 }}
-                    />
-            }} >
-                {(props) =>
-                (
-                    <Fixform {...props} />
                 )
                 }
             </Drawer.Screen>
