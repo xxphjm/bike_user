@@ -129,7 +129,7 @@ const DrawerNavigator = (props) => {
                 )
                 }
             </Drawer.Screen>
-            <Drawer.Screen name="PROFILE" options={{
+            <Drawer.Screen name="Fixform" options={{
                 title: "維修通報" ,drawerIcon: ({ color }) =>
                     <Icon name="account"
                         size={25}
