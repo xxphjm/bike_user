@@ -8,11 +8,14 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    StatusBar
 } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import UserIcon from 'react-native-vector-icons/Feather';
+
 import COLORS from "../../const/colors"
 //寵物資料的api
 import pets from '../../const/pets';
@@ -56,12 +59,11 @@ const Card = ({ pet, navigation }) => {
     )
 }
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation,route }) => {
     //
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0)
     const [filteredPets, setFilteredPet] = useState([])
-
-    //篩選寵物
+   
     const filterPet = (index) => {
         const currentPets = pets.filter((item) => item?.pet?.toLocaleUpperCase() == petCategories[index].name)[0].pets
         // console.log("currentPets =", currentPets[0])
@@ -73,13 +75,21 @@ const HomeScreen = ({ navigation }) => {
         filterPet(0)
     }, [])
 
+     let img=route.params&&route.params.img
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
             {/* 標頭  header */}
+             <StatusBar hidden={true}/>
             <View style={styles.Header}>
                 <Icon name="sort-variant" size={28} onPress={navigation.toggleDrawer} />
-                <Text style={{ color: COLORS.primary, fontSize: 16, fontWeight: "bold" }}>Smile Hsu</Text>
-                <Image source={require(".././../assets/person.png")} style={{ width: 30, height: 30, borderRadius: 15 }} />
+         
+                {img?<TouchableOpacity onPress={navigation.toggleDrawer}><Image source={img} 
+                style={{ width: 30, height: 30, borderRadius: 60  ,borderWidth: 1, borderRadius: 60 ,borderColor:COLORS.grey}} 
+               /></TouchableOpacity>:  
+                  <UserIcon name='user' size={26} color={COLORS.grey}  onPress={() => navigation.navigate("Login")}/>}
+ 
+      
             </View>
             {/* 主要內容 main */}
             <ScrollView showsVerticalScrollIndicator={false}>
