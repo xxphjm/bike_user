@@ -8,7 +8,9 @@ import {
     Platform,
     StyleSheet ,
     StatusBar,
-    Alert
+    Alert,
+    ImageBackground,
+  
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
@@ -17,9 +19,11 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from 'react-native-paper';
 
-// import { AuthContext } from '../components/context';
 
 
+import Users from '../../const/userdata';
+
+import {useFonts,Chewy_400Regular} from '@expo-google-fonts/chewy'
 
 const SignInScreen = ({navigation}) => {
 
@@ -34,7 +38,14 @@ const SignInScreen = ({navigation}) => {
 
     const { colors } = useTheme();
 
-    // const { signIn } = React.useContext(AuthContext);
+    let[Fontload]= useFonts({
+        Chewy_400Regular
+    })
+   
+    if (!Fontload) {
+        return null;
+      }
+
 
     const textInputChange = (val) => {
         if( val.trim().length >= 4 ) {
@@ -55,7 +66,7 @@ const SignInScreen = ({navigation}) => {
     }
 
     const handlePasswordChange = (val) => {
-        if( val.trim().length >= 8 ) {
+        if( val.trim().length >= 4 ) {
             setData({
                 ...data,
                 password: val,
@@ -91,34 +102,46 @@ const SignInScreen = ({navigation}) => {
         }
     }
 
-    // const loginHandle = (userName, password) => {
+    const loginHandle =(userName, password) => {
 
-    //     const foundUser = Users.filter( item => {
-    //         return userName == item.username && password == item.password;
-    //     } );
+        const foundUser = Users.filter( item => {
+            return userName == item.username && password == item.password;
+        } );
+     
+        if ( data.username.length == 0 || data.password.length == 0 ) {
+            Alert.alert('輸入錯誤!', '您的名稱或密碼沒輸入', [
+                {text: '好'}
+            ]);
+            return;
+        }
 
-    //     if ( data.username.length == 0 || data.password.length == 0 ) {
-    //         Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-    //             {text: 'Okay'}
-    //         ]);
-    //         return;
-    //     }
+       else if ( foundUser.length == 0 ) {
+            Alert.alert('無效帳號!', '您的名稱或密碼輸入錯誤', [
+                {text: '好'}
+            ]);
+            return;
+        }
+        else{
 
-    //     if ( foundUser.length == 0 ) {
-    //         Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-    //             {text: 'Okay'}
-    //         ]);
-    //         return;
-    //     }
-    //     signIn(foundUser);
-    // }
+            navigation.navigate('Home',{'userName':foundUser[0].username,'img':foundUser[0].img})
+            navigation.navigate('HomeScreen',{'userName':foundUser[0].username,'img':foundUser[0].img})
+        }
+    }
 
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
+
+      <ImageBackground source={require('../../assets/map.png')} style={{flex:1,height:'40%'}} >
+    
           <StatusBar backgroundColor='#008080' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Welcome!</Text>
+            <Text style={[{color:'#ff5858'},styles.textWel]}>W </Text>
+            <Text style={[{color:'#71d845'},styles.textWel]}>e l </Text>
+            <Text style={[{color:'#ffbd58'},styles.textWel]}>c o </Text>
+            <Text style={[{color:'#00c2cb'},styles.textWel]}>m e </Text>
+            <Text style={[{color:'#cb6ce6'},styles.textWel]}>!</Text>
         </View>
+ 
         <Animatable.View 
             animation="fadeInUpBig"
             style={[styles.footer, {
@@ -127,7 +150,7 @@ const SignInScreen = ({navigation}) => {
         >
             <Text style={[styles.text_footer, {
                 color: colors.text
-            }]}>Username</Text>
+            }]}>使用者名稱</Text>
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
@@ -135,7 +158,7 @@ const SignInScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Username"
+                    placeholder="您的名稱"
                     placeholderTextColor="#666666"
                     style={[styles.textInput, {
                         color: colors.text
@@ -158,7 +181,7 @@ const SignInScreen = ({navigation}) => {
             </View>
             { data.isValidUser ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
+            <Text style={styles.errorMsg}>使用者名稱必須4個字以上</Text>
             </Animatable.View>
             }
             
@@ -166,7 +189,7 @@ const SignInScreen = ({navigation}) => {
             <Text style={[styles.text_footer, {
                 color: colors.text,
                 marginTop: 35
-            }]}>Password</Text>
+            }]}>密碼</Text>
             <View style={styles.action}>
                 <Feather 
                     name="lock"
@@ -174,7 +197,7 @@ const SignInScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Password"
+                    placeholder="您的密碼"
                     placeholderTextColor="#666666"
                     secureTextEntry={data.secureTextEntry ? true : false}
                     style={[styles.textInput, {
@@ -203,29 +226,29 @@ const SignInScreen = ({navigation}) => {
             </View>
             { data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            <Text style={styles.errorMsg}>密碼必須4個字以上.</Text>
             </Animatable.View>
             }
             
 
             <TouchableOpacity>
-                <Text style={{color: '#008080', marginTop:15}}>Forgot password?</Text>
+                <Text style={{color: '#008080', marginTop:15}}>忘記密碼?</Text>
             </TouchableOpacity>
             <View style={styles.button}>
-                <TouchableOpacity
-                    style={styles.signIn}
-                    // onPress={() => {loginHandle( data.username, data.password )}}
-                >
-                <View
-                    colors={['#08d4c4', '#01ab9d']}
-                    style={styles.signIn}
+            <TouchableOpacity
+                    onPress={() => {loginHandle( data.username, data.password )}}
+                    style={[styles.signIn, {
+                        backgroundColor:'#008080',
+                     
+                        marginTop: 15
+                    }]}
                 >
                     <Text style={[styles.textSign, {
-                        color:'#fff'
-                    }]}>Sign In</Text>
-                </View>
+                        color: '#FFF'
+                    }]}>登入</Text>
                 </TouchableOpacity>
 
+{/* 
                 <TouchableOpacity
                     // onPress={() => navigation.navigate('SignUpScreen')}
                     style={[styles.signIn, {
@@ -237,10 +260,11 @@ const SignInScreen = ({navigation}) => {
                     <Text style={[styles.textSign, {
                         color: '#FFF'
                     }]}>Sign Up</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </Animatable.View>
-      </View>
+        </ImageBackground>
+        </View>
     );
 };
 
@@ -249,13 +273,14 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#008080'
+    
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
+        alignItems: "center",
         paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingTop: 40,
+        flexDirection:'row'
     },
     footer: {
         flex: 3,
@@ -312,5 +337,13 @@ const styles = StyleSheet.create({
     textSign: {
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    textWel:{
+        fontSize:38,
+        fontFamily:'Chewy_400Regular',
+        textShadowColor: 'rgba(0,0,0,0.65)',
+        textShadowOffset: { width: 0.7, height: 0.7 },
+        textShadowRadius: 3,
+
     }
   });

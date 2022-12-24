@@ -1,5 +1,5 @@
-import { StatusBar, View, Image, Text } from 'react-native';
-import React from 'react';
+import { StatusBar, View, Image, Text, Alert} from 'react-native';
+import React ,{useState}from 'react';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -17,18 +17,26 @@ const Drawer = createDrawerNavigator();
 
 
 //
-const CustomDrawerContent = props => {
+const CustomDrawerContent =  props => {
+
+        
+        const {userName,img}=props.userdata
+    
+
+
+
     return (
         <DrawerContentScrollView style={{ paddingVertical: 30 }}>
             <View style={{ marginLeft: 20, marginVertical: 40 }}>
-                <Image source={require("../../assets/person.png")}
+               {userName? <><Image source={img}
                     style={{
                         width: 70,
                         height: 70,
                         borderRadius: 20
                     }}
                 />
-                <Text style={{ color: COLORS.white, fontSize: 13, fontWeight: "bold", marginTop: 10 }}> Smile Hsu </Text>
+                <Text style={{ color: COLORS.white, fontSize: 20, fontWeight: "bold", marginTop: 10 }}>{userName}</Text></>: 
+                   <Text style={{ color: COLORS.white, fontSize: 20, fontWeight: "bold", marginTop: 10 }} onPress={()=>props.navigation.navigate("Login")} >登入</Text>}
             </View>
             <DrawerItemList
                 {...props}
@@ -56,8 +64,32 @@ const DrawerScreenContainer = ({ children }) => {
     )
 }
 
+const showAlert=(props)=>{
+    console.log(props);
+    Alert.alert(
+        '提示',
+        "確定要登出？",
+        [
+           
+            {
+                text: '取消',
+                onPress:()=>props.navigation.goBack
+            },
+            {
+                text: '好',
+                onPress:()=>Alert.alert('ok')
+               },
+        ],
+   
+    )
+}
+const DrawerNavigator = (props) => {
+  
 
-const DrawerNavigator = () => {
+   
+    let userdata=props.route.params?props.route.params:{userName:false,img:false}
+
+
     return (
         <Drawer.Navigator screenOptions={{
             headerShown: false,
@@ -80,7 +112,7 @@ const DrawerNavigator = () => {
             //
             drawerLabelStyle: { fontWeight: "bold" },
         }}
-            drawerContent={props => <CustomDrawerContent {...props} />}
+            drawerContent={props => <CustomDrawerContent {...props} userdata={userdata}/>}
         >
             {/* ==================== 選單項目 ==================== */}
             <Drawer.Screen name="Home" options={{
@@ -155,6 +187,15 @@ const DrawerNavigator = () => {
                 (
                     <HomeScreen {...props} />
                 )
+                }
+            </Drawer.Screen>
+            <Drawer.Screen name="Sign out" >
+                {(props) =>
+               { 
+                   showAlert(props)
+                   return <HomeScreen {...props} />
+               }
+                
                 }
             </Drawer.Screen>
 
