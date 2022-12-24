@@ -8,15 +8,13 @@ import {
     useDrawerStatus
 } from '@react-navigation/drawer';
 import HomeScreen from "../screens/HomeScreen"
+import Fixform from "../screens/Fixform"
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
 
-
 const Drawer = createDrawerNavigator();
 
-
-//
 const CustomDrawerContent = props => {
     return (
         <DrawerContentScrollView style={{ paddingVertical: 30 }}>
@@ -144,7 +142,7 @@ const DrawerNavigator = () => {
             </Drawer.Screen>
             {/* ==================== 選單項目 ==================== */}
             <Drawer.Screen name="PROFILE" options={{
-                drawerIcon: ({ color }) =>
+                title: "維修通報" ,drawerIcon: ({ color }) =>
                     <Icon name="account"
                         size={25}
                         color={color}
@@ -153,7 +151,7 @@ const DrawerNavigator = () => {
             }} >
                 {(props) =>
                 (
-                    <HomeScreen {...props} />
+                    <Fixform {...props} />
                 )
                 }
             </Drawer.Screen>
@@ -163,5 +161,3 @@ const DrawerNavigator = () => {
 };
 
 export default DrawerNavigator;
-
-
