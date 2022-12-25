@@ -38,7 +38,32 @@ const Fixform = ({ navigation }) => {
     const [basket, setbasket] = useState(false);
     const [dashboard, setdashboard] = useState(false);
     const [other, setother] = useState(false);
-
+    // const Fix=[
+    //     {
+    //         id:1,
+    //         row:[
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'}
+    //         ]
+    //     },
+    //     {
+    //         id:2,
+    //         row:[
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'}
+    //         ]
+    //     },
+    //     {
+    //         id:3,
+    //         row:[
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'},
+    //             {title:'前燈',name:'headlight'}
+    //         ]
+    //     },
+    // ]
     return (<ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.MainContainer}>
                     <Text style={styles.FixHeader}>維修項目</Text>
