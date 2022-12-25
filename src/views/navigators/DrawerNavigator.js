@@ -1,18 +1,13 @@
-import { StatusBar, View, Image, Text, Alert} from 'react-native';
-import React ,{useState}from 'react';
+import {  View, Image, Text, Alert} from 'react-native';
+import React from 'react';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
     DrawerItemList,
-    useDrawerProgress,
-    useDrawerStatus
 } from '@react-navigation/drawer';
 import HomeScreen from "../screens/HomeScreen"
-
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Animated from 'react-native-reanimated';
-
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent =  props => {    
@@ -40,28 +35,7 @@ const CustomDrawerContent =  props => {
         </DrawerContentScrollView>
     )
 }
-
-const DrawerScreenContainer = ({ children }) => {
-    // 判斷 Drawer 頁面是否作用中
-    const isDrawerOpen = useDrawerStatus()
-    //
-    const progress = useDrawerProgress()
-    //
-    const scale = Animated.interpolateNode(progress, { inputRange: [0, 1], outputRange: [1, 0.8] })
-    //
-    const borderRadius = Animated.interpolateNode(progress, { inputRange: [0, 1], outputRange: [0, 25] })
-    return (
-        <Animated.View style={{ backgroundColor: COLORS.white, flex: 1, transform: [{ scale }], overflow: "hidden", borderRadius }}>
-            <StatusBar barStyle='dark-content'
-                // 根據 Drawer 頁面是否作用中 改變 statusbar 的顏色
-                backgroundColor={isDrawerOpen == "open" ? COLORS.primary : COLORS.white} />
-            {children}
-        </Animated.View>
-    )
-}
-
 const showAlert=(props)=>{
-
     Alert.alert(
         '提示',
         "確定要登出？",
@@ -138,12 +112,6 @@ const DrawerNavigator = (props) => {
                 }
             </Drawer.Screen>
             })}
-     
-
-
-
-
-
         </Drawer.Navigator>
     );
 };
