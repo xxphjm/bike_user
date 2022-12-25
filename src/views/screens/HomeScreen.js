@@ -17,7 +17,6 @@ import COLORS from "../../const/colors"
 //
 const { height } = Dimensions.get("window")
 
-// 寵物卡片
 const HomeScreen = ({ navigation,route,toggle}) => {
     //
 
@@ -37,7 +36,7 @@ const HomeScreen = ({ navigation,route,toggle}) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
             {/* 標頭  header */}
-             <StatusBar hidden={true}/>
+             <StatusBar barStyle='dark-content' backgroundColor='white'/>
             <View style={styles.Header}>
                 <Icon name="sort-variant" size={28} onPress={navigation.toggleDrawer} />
          

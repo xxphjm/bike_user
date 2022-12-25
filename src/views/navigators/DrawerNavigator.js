@@ -20,6 +20,7 @@ const CustomDrawerContent =  props => {
   
     return (
         <DrawerContentScrollView style={{ paddingVertical: 30 }}>
+     
             <View style={{ marginLeft: 20, marginVertical: 40 }}>
                {userName? <><Image source={img}
                     style={{
@@ -35,7 +36,7 @@ const CustomDrawerContent =  props => {
                 {...props}
             />
 
-           <Text  style={{ marginLeft: 20,color: COLORS.white, fontSize: 18, fontWeight: "bold", marginTop: 10 }} onPress={()=>showAlert(props)}>登出</Text>
+           {userName&&<Text  style={{ marginLeft: 20,color: COLORS.white, fontSize: 18, fontWeight: "bold", marginTop: 10 }} onPress={()=>showAlert(props)}>登出</Text>}
         </DrawerContentScrollView>
     )
 }
@@ -60,7 +61,7 @@ const DrawerScreenContainer = ({ children }) => {
 }
 
 const showAlert=(props)=>{
-    console.log(props);
+
     Alert.alert(
         '提示',
         "確定要登出？",
@@ -82,7 +83,19 @@ const showAlert=(props)=>{
 const DrawerNavigator = (props) => {
    
     let userdata=props.route.params?props.route.params:{userName:false,img:false}
-
+     
+    const Drawerinfo=[
+        {
+            title:"ADOPTION",
+            name:'Home',
+            icon:'paw'
+        },
+        {
+            title:"維修通報",
+            name:'Fixform',
+            icon:'tools'
+        }
+    ]
     return (
         <Drawer.Navigator screenOptions={{
             headerShown: false,
@@ -107,10 +120,12 @@ const DrawerNavigator = (props) => {
         }}
             drawerContent={props => <CustomDrawerContent {...props} userdata={userdata}/>}
         >
-            {/* ==================== 選單項目 ==================== */}
-            <Drawer.Screen name="Home" options={{
-                title: "ADOPTION", drawerIcon: ({ color }) =>
-                    <Icon name="paw"
+                   {/* ==================== 選單項目 ==================== */}
+        {Drawerinfo.map((value)=>{
+            const{title,name,icon}=value
+            return <Drawer.Screen key={title} name={name} options={{
+                title: title, drawerIcon: ({ color }) =>
+                    <Icon name={icon}
                         size={25}
                         color={color}
                         style={{ marginRight: -20 }}
@@ -118,69 +133,15 @@ const DrawerNavigator = (props) => {
             }} >
                 {(props) =>
                 (
-                    <HomeScreen {...props} />
+                    <HomeScreen {...props} toggle={name} />
                 )
                 }
             </Drawer.Screen>
-            <Drawer.Screen name="Fixform" options={{
-                title: "維修通報" ,drawerIcon: ({ color }) =>
-                    <Icon name="tools"
-                        size={25}
-                        color={color}
-                        style={{ marginRight: -20 }}
-                    />
-            }} >
-                {(props) =>
-                (
-                    <HomeScreen {...props} toggle={'Fixform'} />
-                )
-                }
-            </Drawer.Screen>
-            {/* ==================== 選單項目 ==================== */}
-            <Drawer.Screen name="DONATION" options={{
-                drawerIcon: ({ color }) =>
-                    <Icon name="gift"
-                        size={25}
-                        color={color}
-                        style={{ marginRight: -20 }}
-                    />
-            }} >
-                {(props) =>
-                (
-                    <HomeScreen {...props} />
-                )
-                }
-            </Drawer.Screen>
-            {/* ==================== 選單項目 ==================== */}
-            <Drawer.Screen name="ADD PET" options={{
-                drawerIcon: ({ color }) =>
-                    <Icon name="plus-box"
-                        size={25}
-                        color={color}
-                        style={{ marginRight: -20 }}
-                    />
-            }} >
-                {(props) =>
-                (
-                    <HomeScreen {...props} />
-                )
-                }
-            </Drawer.Screen>
-            {/* ==================== 選單項目 ==================== */}
-            <Drawer.Screen name="FAVORITES" options={{
-                drawerIcon: ({ color }) =>
-                    <Icon name="heart"
-                        size={25}
-                        color={color}
-                        style={{ marginRight: -20 }}
-                    />
-            }} >
-                {(props) =>
-                (
-                    <HomeScreen {...props} />
-                )
-                }
-            </Drawer.Screen>
+            })}
+     
+
+
+
 
 
         </Drawer.Navigator>
