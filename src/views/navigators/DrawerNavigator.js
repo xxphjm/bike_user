@@ -17,7 +17,7 @@ const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent =  props => {    
         const {userName,img}=props.userdata
-
+  
     return (
         <DrawerContentScrollView style={{ paddingVertical: 30 }}>
             <View style={{ marginLeft: 20, marginVertical: 40 }}>
@@ -34,6 +34,8 @@ const CustomDrawerContent =  props => {
             <DrawerItemList
                 {...props}
             />
+
+           <Text  style={{ marginLeft: 20,color: COLORS.white, fontSize: 18, fontWeight: "bold", marginTop: 10 }} onPress={()=>showAlert(props)}>登出</Text>
         </DrawerContentScrollView>
     )
 }
@@ -69,7 +71,10 @@ const showAlert=(props)=>{
             },
             {
                 text: '好',
-                onPress:()=>Alert.alert('ok')
+                onPress:()=>{
+                    props.navigation.navigate("HomeScreen")
+                    props.navigation.navigate("Home")
+                }
                },
         ],
     )
@@ -119,7 +124,7 @@ const DrawerNavigator = (props) => {
             </Drawer.Screen>
             <Drawer.Screen name="Fixform" options={{
                 title: "維修通報" ,drawerIcon: ({ color }) =>
-                    <Icon name="account"
+                    <Icon name="tools"
                         size={25}
                         color={color}
                         style={{ marginRight: -20 }}
@@ -176,15 +181,7 @@ const DrawerNavigator = (props) => {
                 )
                 }
             </Drawer.Screen>
-            <Drawer.Screen name="Sign out" >
-                {(props) =>
-               { 
-                   showAlert(props)
-                   return <HomeScreen {...props} />
-               }
-                
-                }
-            </Drawer.Screen>
+
 
         </Drawer.Navigator>
     );
