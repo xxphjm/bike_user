@@ -8,7 +8,7 @@ import {
     useDrawerStatus
 } from '@react-navigation/drawer';
 import HomeScreen from "../screens/HomeScreen"
-import Fixform from "../screens/Fixform"
+
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
@@ -127,7 +127,7 @@ const DrawerNavigator = (props) => {
             }} >
                 {(props) =>
                 (
-                    <Fixform {...props} />
+                    <HomeScreen {...props} toggle={'Fixform'} />
                 )
                 }
             </Drawer.Screen>

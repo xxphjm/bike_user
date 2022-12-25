@@ -18,9 +18,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from 'react-native-paper';
-
-
-
 import Users from '../../const/userdata';
 
 import {useFonts,Chewy_400Regular} from '@expo-google-fonts/chewy'
@@ -123,6 +120,7 @@ const SignInScreen = ({navigation}) => {
         }
         else{
 
+       
             navigation.navigate('Home',{'userName':foundUser[0].username,'img':foundUser[0].img})
             navigation.navigate('HomeScreen',{'userName':foundUser[0].username,'img':foundUser[0].img})
         }
