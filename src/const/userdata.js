@@ -1,4 +1,4 @@
-export default Users = [
+const Users= [
     {
         id: 1, 
         email: 'user1@email.com',
@@ -10,8 +10,8 @@ export default Users = [
     {
         id: 2, 
         email: 'user2@email.com',
-        username: 'user2', 
-        password: 'pass1234', 
+        username: 'user', 
+        password: 'pass', 
         userToken: 'token12345'
     },
     {
@@ -22,3 +22,8 @@ export default Users = [
         userToken: 'testtoken'
     },
 ];
+
+
+
+
+export default Users

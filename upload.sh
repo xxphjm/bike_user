@@ -1,4 +1,4 @@
 git pull
 git add .
-git commit -m "Toggle"
+git commit -m "merge"
 git push -u origin main

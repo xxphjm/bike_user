@@ -13,13 +13,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserIcon from 'react-native-vector-icons/Feather';
 import Fixform from "../screens/Fixform"
 import COLORS from "../../const/colors"
+import FindStation from './FindStation';
+
 //寵物資料的api
 //
 const { height } = Dimensions.get("window")
 
-const HomeScreen = ({ navigation,route,toggle}) => {
+const HomeScreen = (props) => {
     //
-
+       const{ navigation,route,toggle}=props
      let img=route.params&&route.params.img
     
     const Togglepage=()=>{
@@ -27,10 +29,11 @@ const HomeScreen = ({ navigation,route,toggle}) => {
         switch (toggle) {
             case 'Fixform':
                 return <Fixform/>
+         
                
             default:
-   
-            return <List navigation={navigation}/>
+                return <FindStation {...props} />
+    
         }
     }
     return (

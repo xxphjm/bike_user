@@ -8,6 +8,7 @@ import {
 import HomeScreen from "../screens/HomeScreen"
 import COLORS from '../../const/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent =  props => {    
@@ -65,9 +66,15 @@ const DrawerNavigator = (props) => {
             icon:'paw'
         },
         {
+            title:"站點查詢",
+            name:'FindStation',
+            icon:'paw'
+        },
+        {
             title:"維修通報",
             name:'Fixform',
             icon:'tools'
+            
         }
     ]
     return (
