@@ -23,7 +23,7 @@ const { height } = Dimensions.get("window");
 
 
 const BikeModel=(bike,navigation,text,route)=>{
-
+  // eslint-disable-next-line no-sparse-arrays
   Alert.alert('', text, [
     {
       text: '取消',

@@ -137,7 +137,7 @@ const SignInScreen = ({navigation}) => {
             <Text style={[{color:'#71d845'},styles.textWel]}>e l </Text>
             <Text style={[{color:'#ffbd58'},styles.textWel]}>c o </Text>
             <Text style={[{color:'#00c2cb'},styles.textWel]}>m e </Text>
-            <Text style={[{color:'#cb6ce6'},styles.textWel]}>!</Text>
+            <Text style={[{color: '#cb6ce6'},styles.textWel]}>!</Text>
         </View>
  
         <Animatable.View 

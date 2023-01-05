@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 import React, { useState } from 'react';
 import {
     Dimensions,
@@ -13,7 +14,7 @@ import {
 import COLORS from "../../const/colors"
 import { CheckBox } from '@rneui/themed';
 
-const { height } = Dimensions.get("window")
+
 const Fixform = ({ navigation }) => {
     const [bikeID, setbikeID] = useState('');
 
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
         paddingTop:5,
         paddingLeft: '45%',
         paddingRight: '40%',
-        paddingTop:'7%',
+        paddingTop: '40%',
         alignItems: 'center',
         justifyContent: 'center',
     },

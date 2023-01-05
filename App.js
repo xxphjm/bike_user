@@ -3,8 +3,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from './src/views/screens/Login'
-import Signup from'./src/views/screens/Signup'
+import Login from './src/views/screens/Login';
+import Signup from './src/views/screens/Signup';
 import DrawerNavigator from './src/views/navigators/DrawerNavigator';
 import DetailsScreen from './src/views/screens/DetailsScreen';
 
@@ -28,3 +28,4 @@ const App = () => {
 };
 
 export default App;
+
