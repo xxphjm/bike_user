@@ -150,7 +150,7 @@ const StationCard = ({ station, route,navigation }) => {
             </Text>
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            {"尚餘 " + station?.mat + " 輛"}
+            {"尚餘 " + station.bike.length + " 輛"}
           </Text>
           {/* <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
             {station?.addr}
@@ -237,7 +237,7 @@ class FindStation extends React.Component {
     const showLocalList = () => {
       this.LocalActive.show();
     };
-    const bikeid=typeof this.props.route.params=='undefined' ?[]:typeof this.props.route.params.name=='undefined'&&[]
+    const bikeid=typeof this.props.route.params=='undefined' ?[]:typeof this.props.route.params.name=='undefined'?[]:this.props.route.params.name
     const route=this.props.route?this.props.route:[]
 
     return (
