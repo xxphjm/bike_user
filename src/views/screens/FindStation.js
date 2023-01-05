@@ -13,21 +13,17 @@ import {
   Alert
 } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
-
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import UserIcon from "react-native-vector-icons/Feather";
 import ActionSheet from "react-native-actionsheet";
 
 import COLORS from "../../const/colors";
 import Stations from "../../const/stations";
-import { loadLocalRawResource } from "react-native-svg";
-import HomeScreen from "./HomeScreen";
+
 
 const { height } = Dimensions.get("window");
 
 
 const BikeModel=(bike,navigation,text,route)=>{
-   console.log(bike);
+
   Alert.alert('', text, [
     {
       text: '取消',
@@ -241,9 +237,9 @@ class FindStation extends React.Component {
     const showLocalList = () => {
       this.LocalActive.show();
     };
-    const bikeid=typeof(this.props.route.params)=='undefined'?[]:this.props.route.params.name
+    const bikeid=typeof this.props.route.params=='undefined' ?[]:typeof this.props.route.params.name=='undefined'&&[]
     const route=this.props.route?this.props.route:[]
-   console.log(bikeid);
+
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
         
@@ -283,9 +279,9 @@ class FindStation extends React.Component {
             </View>
           </View>
         </ScrollView>
-               
+          {console.log(bikeid.length!=0)}
         {bikeid.length!=0 &&<TouchableOpacity
-                    onPress={() => {BikeModel(bikeid,navigation,'是否歸還',route)}}
+                    onPress={() => {BikeModel(bikeid,navigation,'是否歸還 '+bikeid,route)}}
                     style={[ {
                         backgroundColor:'#008080',
                         justifyContent: 'center',

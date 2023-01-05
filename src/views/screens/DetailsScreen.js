@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, ImageBackground
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLORS from "../../const/colors"
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 
 const DetailsScreen = ({ navigation, route }) => {

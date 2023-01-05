@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Dimensions,
     StyleSheet,
     Text,
     View,
-    SafeAreaView,
-    Image,
     TextInput,
     TouchableOpacity,
     Alert,
     Keyboard,
     TouchableWithoutFeedback } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import COLORS from "../../const/colors"
 import { CheckBox } from '@rneui/themed';
 
