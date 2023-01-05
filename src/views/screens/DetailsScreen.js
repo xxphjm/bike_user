@@ -64,13 +64,13 @@ const DetailsScreen = ({ navigation, route }) => {
                 <View>
                     <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
                         {/* 左邊:頭像  */}
-                        <Image source={require("../../assets/person.png")}
+                        {/* <Image source={require("../../assets/person.png")}
                             style={{
                                 width: 40,
                                 height: 40,
                                 borderRadius: 20
                             }}
-                        />
+                        /> */}
                         {/* 右邊: 個人資訊 */}
                         <View style={{ flex: 1, paddingLeft: 10, height: 20 }}>
                             <Text style={{ fontSize: 12, color: COLORS.dark, fontWeight: "bold" }}>Smile Hsu</Text>

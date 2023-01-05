@@ -7,19 +7,20 @@ import Login from './src/views/screens/Login'
 import Signup from'./src/views/screens/Signup'
 import DrawerNavigator from './src/views/navigators/DrawerNavigator';
 import DetailsScreen from './src/views/screens/DetailsScreen';
+
 import { BikeScreen} from './src/views/screens/FindStation';
 
 const Stack = createNativeStackNavigator();
 
-const App = ({navigation}) => {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+  
         <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={Signup} />
- 
-        <Stack.Screen name="BikeScreen" component={BikeScreen} navigation={navigation}/>
+        <Stack.Screen name="BikeScreen" component={BikeScreen} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>

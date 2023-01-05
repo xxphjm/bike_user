@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  Alert
 } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 
@@ -20,105 +21,86 @@ import ActionSheet from "react-native-actionsheet";
 import COLORS from "../../const/colors";
 import Stations from "../../const/stations";
 import { loadLocalRawResource } from "react-native-svg";
+import HomeScreen from "./HomeScreen";
 
 const { height } = Dimensions.get("window");
 
-const BikeModal = (props) => {
-   const{RentScreenVisible, setRentScreenVisible}=props
+
+const BikeModel=(bike,navigation,text,route)=>{
+   console.log(bike);
+  Alert.alert('', text, [
+    {
+      text: '取消',
+      onPress: () => console.log('Cancel Pressed'), style: 'cancel'
+    },, 
+    {text: '是',
+    onPress: () => {
+     if (text=='確認租借？') {
+      
+       navigation.navigate("FindStation", bike)
+     }
+     else{
+      Alert.alert('還車成功')
+      navigation.navigate("FindStation")
+      navigation.navigate("HomeScreen")
+     }
+    }
+}]);
+}
+const BikeCard = ({ bike, navigation }) => {
+
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={RentScreenVisible}
-      onRequestClose={() => {
-        setRentScreenVisible(!RentScreenVisible);
-      }}
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => BikeModel(bike,navigation,'確認租借？')}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>確認租借？</Text>
+    
+      <View style={styles.CardContainer}>
+        {/* 車輛現況圖 */}
+        <View style={styles.CardImageContainer}>
+          <Image
+            source={bike?.image}
+            style={{ width: "100%", height: "100%", resizeMode: "contain" }}
+          />
+        </View>
+        {/* 車輛的資訊 */}
+        <View style={styles.CardDetailContainer}>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
             }}
           >
-            <View style={{ flex: 1, margin: 5, width: 80 }}>
-              <Button
-                color={COLORS.primary}
-                title="取消"
-                onPress={() => setRentScreenVisible(!RentScreenVisible)}
-              />
-            </View>
-            <View style={{ flex: 1, margin: 5, width: 80 }}>
-              <Button
-                 color={COLORS.primary}
-                title="確認"
-                onPress={() => setRentScreenVisible(!RentScreenVisible)}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  );
-};
-
-const BikeScreen = ({ navigation, route }) => {
-  const BikeData = route.params.bike;
-  const [RentScreenVisible, setRentScreenVisible] = useState(false);
-
-  const BikeCard = ({ bike, navigation }) => {
-    return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => setRentScreenVisible(true)}
-      >
-      
-        <View style={styles.CardContainer}>
-          {/* 車輛現況圖 */}
-          <View style={styles.CardImageContainer}>
-            <Image
-              source={bike?.image}
-              style={{ width: "100%", height: "100%", resizeMode: "contain" }}
-            />
-          </View>
-          {/* 車輛的資訊 */}
-          <View style={styles.CardDetailContainer}>
-            <View
+            <Text
               style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
+                color: COLORS.dark,
+                fontSize: 20,
+                fontWeight: "bold",
               }}
             >
-              <Text
-                style={{
-                  color: COLORS.dark,
-                  fontSize: 20,
-                  fontWeight: "bold",
-                }}
-              >
-                {"ID: " + bike?.name}
-              </Text>
-            </View>
-            <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-              {"型號: " + bike?.type}
+              {"ID: " + bike?.name}
             </Text>
           </View>
+          <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
+            {"型號: " + bike?.type}
+          </Text>
         </View>
-      </TouchableOpacity>
-    );
-  };
+      </View>
+    </TouchableOpacity>
+  );
+};
+const BikeScreen = ({ navigation, route }) => {
+  const BikeData = route.params.bike;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-        <BikeModal  RentScreenVisible={RentScreenVisible}  setRentScreenVisible={ setRentScreenVisible}/>
+       
       <View style={{ marginStart: 20, marginTop: 20 }}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={BikeData}
           renderItem={({ item }) => (
-            <BikeCard bike={item} navigation={navigation} />
+            <BikeCard bike={item}  navigation={navigation} />
           )}
         />
       </View>
@@ -126,19 +108,31 @@ const BikeScreen = ({ navigation, route }) => {
   );
 };
 
-const StationCard = ({ station, navigation }) => {
-
+const StationCard = ({ station, route,navigation }) => {
+  const Confirm_bike=()=>{
+ 
+    if ( route.params) {
+      
+      Alert.alert('', '請先還車', [
+        {text: '好'}
+    ]);
+    return;
+    }
+    else{
+      navigation.navigate("BikeScreen", station)
+    }
+    }
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate("BikeScreen", station)}
+      onPress={() => Confirm_bike() }
     >
       <View style={styles.CardContainer}>
         {/* 站點的圖片 */}
         <View style={styles.CardImageContainer}>
           <Image
             source={station.image}
-            style={{ width: "100%", height: "100%", resizeMode: "contain" }}
+            style={{ width: "100%", height: "100%", resizeMode: "contain" ,   borderRadius: 20}}
           />
         </View>
         {/* 站點的簡介 */}
@@ -162,17 +156,17 @@ const StationCard = ({ station, navigation }) => {
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
             {"尚餘 " + station?.mat + " 輛"}
           </Text>
-          <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
+          {/* <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
             {station?.addr}
-          </Text>
-          <View style={{ flexDirection: "row", marginTop: 5 }}>
+          </Text> */}
+          {/* <View style={{ flexDirection: "row", marginTop: 5 }}>
             <Icon name="map-marker" size={18} color={COLORS.primary} />
             <Text
               style={{ fontSize: 12, marginLeft: 5, color: COLORS.primary }}
             >
               {"距離 " + station?.distance + " KM"}
             </Text>
-          </View>
+          </View> */}
         </View>
       </View>
     </TouchableOpacity>
@@ -247,10 +241,9 @@ class FindStation extends React.Component {
     const showLocalList = () => {
       this.LocalActive.show();
     };
-    const showCountyList = () => {
-      this.CountyActive.show();
-    };
-
+    const bikeid=typeof(this.props.route.params)=='undefined'?[]:this.props.route.params.name
+    const route=this.props.route?this.props.route:[]
+   console.log(bikeid);
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
         
@@ -276,23 +269,7 @@ class FindStation extends React.Component {
                   }}
                 />
               </View>
-              <View style={{ width: 100 }}>
-                <Button color={COLORS.primary} title={this.state.County} onPress={showCountyList} />
-                <ActionSheet
-                  ref={(o) => (this.CountyActive = o)}
-                  title="選擇地區"
-                  options={this.state.CountyList}
-                  cancelButtonIndex={this.state.CountyList.indexOf(
-                    this.state.County
-                  )}
-                  destructiveButtonIndex={this.state.CountyList.indexOf(
-                    this.state.County
-                  )}
-                  onPress={(index) => {
-                    this.CountyChange(index);
-                  }}
-                />
-              </View>
+       
             </View>
             {/* 下方的站點展示 內容區塊 */}
             <View style={{ marginTop: 20 }}>
@@ -300,12 +277,27 @@ class FindStation extends React.Component {
                 showsVerticalScrollIndicator={false}
                 data={this.state.StationData}
                 renderItem={({ item }) => (
-                  <StationCard station={item} navigation={navigation}  />
+                  <StationCard station={item} route={route} navigation={navigation}  />
                 )}
               />
             </View>
           </View>
         </ScrollView>
+               
+        {bikeid.length!=0 &&<TouchableOpacity
+                    onPress={() => {BikeModel(bikeid,navigation,'是否歸還',route)}}
+                    style={[ {
+                        backgroundColor:'#008080',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingTop: 15,
+                        paddingBottom: 15
+                    }]}
+                >
+                    <Text style={[{
+                        color: '#FFF'
+                    }]}>還車</Text>
+                </TouchableOpacity>}
       </SafeAreaView>
     );
   }
@@ -340,20 +332,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
   },
-  CategoryBtn: {
-    width: 50,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: COLORS.primary,
-  },
-  CategoryBtnName: {
-    color: COLORS.dark,
-    fontSize: 10,
-    fontWeight: "bold",
-    marginTop: 5,
-  },
+
+
   CardContainer: {
     flexDirection: "row",
     alignItems: "center",

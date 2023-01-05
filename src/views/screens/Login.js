@@ -121,7 +121,7 @@ const SignInScreen = ({navigation}) => {
         else{
 
        
-            navigation.navigate('Home',{'userName':foundUser[0].username,'img':foundUser[0].img})
+            navigation.navigate('FindStation',{'userName':foundUser[0].username,'img':foundUser[0].img})
             navigation.navigate('HomeScreen',{'userName':foundUser[0].username,'img':foundUser[0].img})
         }
     }

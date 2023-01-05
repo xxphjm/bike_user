@@ -49,7 +49,7 @@ const showAlert=(props)=>{
                 text: '好',
                 onPress:()=>{
                     props.navigation.navigate("HomeScreen")
-                    props.navigation.navigate("Home")
+                    props.navigation.navigate("FindStation")
                 }
                },
         ],
@@ -60,11 +60,7 @@ const DrawerNavigator = (props) => {
     let userdata=props.route.params?props.route.params:{userName:false,img:false}
      
     const Drawerinfo=[
-        {
-            title:"ADOPTION",
-            name:'Home',
-            icon:'paw'
-        },
+   
         {
             title:"站點查詢",
             name:'FindStation',
@@ -75,7 +71,8 @@ const DrawerNavigator = (props) => {
             name:'Fixform',
             icon:'tools'
             
-        }
+        },
+        
     ]
     return (
         <Drawer.Navigator screenOptions={{

@@ -6,9 +6,11 @@ import {
     SafeAreaView,
     Image,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    Text,
+    Button,
 } from 'react-native';
-import { List } from './List';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserIcon from 'react-native-vector-icons/Feather';
 import Fixform from "../screens/Fixform"
@@ -23,7 +25,7 @@ const HomeScreen = (props) => {
     //
        const{ navigation,route,toggle}=props
      let img=route.params&&route.params.img
-    
+
     const Togglepage=()=>{
         
         switch (toggle) {
@@ -35,6 +37,7 @@ const HomeScreen = (props) => {
                 return <FindStation {...props} />
     
         }
+
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -52,8 +55,12 @@ const HomeScreen = (props) => {
             </View>
             {/* 主要內容 main */}
            {Togglepage()}
-        
+
+       
+ 
+
         </SafeAreaView>
+     
     );
 };
 const styles = StyleSheet.create({
@@ -72,6 +79,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 40,
     },
+
 
 
     
