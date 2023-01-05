@@ -75,14 +75,8 @@ const Fixform = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-            {/* 標頭  header */}
-            <View style={styles.Header}>
-                <Icon name="sort-variant" size={28} onPress={navigation.toggleDrawer} />
-                <Text style={{ color: COLORS.primary, fontSize: 16, fontWeight: "bold" }}>Smile Hsu</Text>
-                <Image source={require(".././../assets/person.png")} style={{ width: 30, height: 30, borderRadius: 15 }} />
-            </View>
 
+            <View>
             {/* 主要內容 main */}
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.MainContainer}>
@@ -95,11 +89,9 @@ const Fixform = ({ navigation }) => {
                     {/* CheckBox */}
                     <View style={{marginBottom:8,paddingLeft:'4%'}}>
                         {Fix.map((Fixrow) => (
-                            <View key={Fixrow.id} style={{flexDirection:'row',alignItems:'flex-start'}}>
-                                {Fixrow.row.map((val,index)=>{
-                                    console.log({...fixbike,[val.name]:!fixbike[val.name]})
-                                   return <CheckBox key={index} title={val.title} checkedIcon="dot-circle-o" uncheckedIcon="circle-o" checked={fixbike[val.name]} onPress={() => setfixbike({...fixbike,[val.name]:!fixbike[val.name]})}/>
-                                })}
+                            <View key={Fixrow.id}  style={{flexDirection:'row',alignItems:'flex-start'}}>
+                                {Fixrow.row.map((val,index)=>(<CheckBox checkedColor={COLORS.primary} key={index} title={val.title} checkedIcon="dot-circle-o" uncheckedIcon="circle-o" checked={fixbike[val.name]} onPress={() => setfixbike({...fixbike,[val.name]:!fixbike[val.name]})}/>
+                                ))}
                                 {/* {console.log(index)} */}
                             </View>
                         ))}
@@ -111,7 +103,7 @@ const Fixform = ({ navigation }) => {
                     <TouchableOpacity style={styles.FixBtn} onPress={SendFrom}><Text style={styles.FixBtnText}>送出</Text></TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
-        </SafeAreaView>
+            </View>
     );
 };
 
