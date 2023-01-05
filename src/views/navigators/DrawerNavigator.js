@@ -64,7 +64,7 @@ const DrawerNavigator = (props) => {
         {
             title:"站點查詢",
             name:'FindStation',
-            icon:'paw'
+            icon:'map-marker'
         },
         {
             title:"維修通報",
