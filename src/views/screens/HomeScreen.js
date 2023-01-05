@@ -30,7 +30,8 @@ const HomeScreen = (props) => {
         
         switch (toggle) {
             case 'Fixform':
-                return <Fixform/>
+                return <Fixform {...props}/>
+
          
                
             default:

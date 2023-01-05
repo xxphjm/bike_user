@@ -69,7 +69,7 @@ const Fixform = ({ navigation }) => {
               onPress: () => console.log('Cancel Pressed'), style: 'cancel'
             },
             { text: '確定',
-              onPress: () => {Alert.alert('送出成功!','',[{text: '確定'}]),navigation.goBack()}}
+              onPress: () => {Alert.alert('送出成功!','',[{text: '確定',onPress: () => {navigation.goBack()}}])}}
           ],
         )
     };
