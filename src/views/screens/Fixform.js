@@ -14,7 +14,6 @@ import {
 import COLORS from "../../const/colors"
 import { CheckBox } from '@rneui/themed';
 
-const { height } = Dimensions.get("window")
 const Fixform = ({ navigation }) => {
     const [bikeID, setbikeID] = useState('');
     const Fixval = {

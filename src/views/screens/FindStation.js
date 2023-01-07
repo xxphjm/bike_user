@@ -24,6 +24,8 @@ const { height } = Dimensions.get("window");
 
 const BikeModel=(bike,navigation,text,route)=>{
   // eslint-disable-next-line no-sparse-arrays
+
+  // eslint-disable-next-line no-sparse-arrays
   Alert.alert('', text, [
     {
       text: '取消',
@@ -33,22 +35,21 @@ const BikeModel=(bike,navigation,text,route)=>{
     onPress: () => {
      if (text=='確認租借？') {
       
-       navigation.navigate("FindStation", bike)
+       navigation.navigate("FindStation", {...bike,userName:route.params.userName,img:route.params.img})
      }
      else{
       Alert.alert('還車成功')
-      navigation.navigate("FindStation")
-      navigation.navigate("HomeScreen")
+      navigation.navigate("FindStation", {...bike,userName:route.params.userName,img:route.params.img})
      }
     }
 }]);
 }
-const BikeCard = ({ bike, navigation }) => {
+const BikeCard = ({ bike, navigation,route }) => {
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => BikeModel(bike,navigation,'確認租借？')}
+      onPress={() => BikeModel(bike,navigation,'確認租借？',route)}
     >
     
       <View style={styles.CardContainer}>
@@ -96,7 +97,7 @@ const BikeScreen = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
           data={BikeData}
           renderItem={({ item }) => (
-            <BikeCard bike={item}  navigation={navigation} />
+            <BikeCard bike={item}  navigation={navigation} route={route}/>
           )}
         />
       </View>
@@ -106,8 +107,11 @@ const BikeScreen = ({ navigation, route }) => {
 
 const StationCard = ({ station, route,navigation }) => {
   const Confirm_bike=()=>{
- 
-    if ( route.params) {
+
+ // eslint-disable-next-line no-prototype-builtins
+ const params =typeof route.params!='undefined'?route.params:{name:false}
+
+    if ( params.name) {
       
       Alert.alert('', '請先還車', [
         {text: '好'}
@@ -115,7 +119,7 @@ const StationCard = ({ station, route,navigation }) => {
     return;
     }
     else{
-      navigation.navigate("BikeScreen", station)
+      navigation.navigate("BikeScreen", {...station,...route.params})
     }
     }
   return (
@@ -279,8 +283,8 @@ class FindStation extends React.Component {
             </View>
           </View>
         </ScrollView>
-          {console.log(bikeid.length!=0)}
-        {bikeid.length!=0 &&<TouchableOpacity
+       
+        {bikeid.length!=0  &&<TouchableOpacity
                     onPress={() => {BikeModel(bikeid,navigation,'是否歸還 '+bikeid,route)}}
                     style={[ {
                         backgroundColor:'#008080',

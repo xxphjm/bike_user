@@ -9,21 +9,18 @@ import {
     TouchableOpacity,
     StatusBar,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserIcon from 'react-native-vector-icons/Feather';
 import Fixform from "../screens/Fixform"
 import COLORS from "../../const/colors"
 import FindStation from './FindStation';
-
-//寵物資料的api
 //
 const { height } = Dimensions.get("window")
 
 const HomeScreen = (props) => {
-    //
-       const{ navigation,route,toggle}=props
-     let img=route.params&&route.params.img
+    const{ navigation,route,toggle}=props
+    let img=route.params&&route.params.img
+    console.log(route.params);
 
     const Togglepage=()=>{
         
